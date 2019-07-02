@@ -14,7 +14,7 @@
     <div class="options">
         <div class="slidercontainer">
             <p id="lenSlideInfo"></p>
-            <input type="range" min="1" max="10" value="5" class="slider" id="lenSlide">
+            <input type="range" min="2" max="10" value="6" class="slider" id="lenSlide">
         </div>
 
         <div class="slidercontainer">
@@ -32,7 +32,7 @@
     
     <!--MAIN GAME SECTION-->
     <div class="main">
-        <div class="keyboard">
+        <div class="fakeboard">
             <button type="button" id="b0" class="pianoKey">0</button>
             <button type="button" id="b1" class="pianoKey">1</button>
             <button type="button" id="b2" class="pianoKey">2</button>
@@ -52,6 +52,45 @@
             <button type="button" id="b16" class="pianoKey">16</button>
             <button type="button" id="b17" class="pianoKey">17</button>
             <button type="button" id="b18" class="pianoKey">18</button>
+        </div>
+        <div class="keyboard">
+            <div class="whiteKeys">
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+                <div class="wKey"></div>
+            </div>
+            <div class="blackKeys">
+                <div class="bKInner1">
+                    <div class="bKey bK1-1"></div>
+                    <div class="bKey bK1-2"></div>
+                </div>
+                <div class="bKInner2">
+                        <div class="bKey bK2-1"></div>
+                        <div class="bKey bK2-2"></div>
+                        <div class="bKey bK2-3"></div>
+                </div>
+                <div class="bKInner3">
+                        <div class="bKey bK1-1"></div>
+                        <div class="bKey bK1-2"></div>
+                    </div>
+                    <div class="bKInner4">
+                            <div class="bKey bK2-1"></div>
+                            <div class="bKey bK2-2"></div>
+                            <div class="bKey bK2-3"></div>
+                    </div>
+            </div>
         </div>
         <br>
         <button type="button" id="check">Check</button>

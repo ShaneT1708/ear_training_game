@@ -9,38 +9,37 @@ $(document).ready(function () {
     // SOUNDS
 
 
-    var c3 = new Audio('../assets/notes/c3.mp3');
+    var cn3 = new Audio('../assets/notes/cn3.mp3');
     var cs3 = new Audio('../assets/notes/cs3.mp3');
-    var d3 = new Audio('../assets/notes/d3.mp3');
+    var dn3 = new Audio('../assets/notes/dn3.mp3');
     var ds3 = new Audio('../assets/notes/ds3.mp3');
-    var e3 = new Audio('../assets/notes/e3.mp3');
-    var f3 = new Audio('../assets/notes/f3.mp3');
+    var en3 = new Audio('../assets/notes/en3.mp3');
+    var fn3 = new Audio('../assets/notes/fn3.mp3');
     var fs3 = new Audio('../assets/notes/fs3.mp3');
-    var g3 = new Audio('../assets/notes/g3.mp3');
+    var gn3 = new Audio('../assets/notes/gn3.mp3');
     var gs3 = new Audio('../assets/notes/gs3.mp3');
-    var a3 = new Audio('../assets/notes/a3.mp3');
+    var an3 = new Audio('../assets/notes/an3.mp3');
     var as3 = new Audio('../assets/notes/as3.mp3');
-    var b3 = new Audio('../assets/notes/b3.mp3');
-    var c4 = new Audio('../assets/notes/c4.mp3');
+    var bn3 = new Audio('../assets/notes/bn3.mp3');
+    var cn4 = new Audio('../assets/notes/cn4.mp3');
     var cs4 = new Audio('../assets/notes/cs4.mp3');
-    var d4 = new Audio('../assets/notes/d4.mp3');
+    var dn4 = new Audio('../assets/notes/dn4.mp3');
     var ds4 = new Audio('../assets/notes/ds4.mp3');
-    var e4 = new Audio('../assets/notes/e4.mp3');
-    var f4 = new Audio('../assets/notes/f4.mp3');
+    var en4 = new Audio('../assets/notes/en4.mp3');
+    var fn4 = new Audio('../assets/notes/fn4.mp3');
     var fs4 = new Audio('../assets/notes/fs4.mp3');
-    var g4 = new Audio('../assets/notes/g4.mp3');
+    var gn4 = new Audio('../assets/notes/gn4.mp3');
     var gs4 = new Audio('../assets/notes/gs4.mp3');
-    var a4 = new Audio('../assets/notes/a4.mp3');
+    var an4 = new Audio('../assets/notes/an4.mp3');
     var as4 = new Audio('../assets/notes/as4.mp3');
-    var b4 = new Audio('../assets/notes/b4.mp3');
-    var c5 = new Audio('../assets/notes/c5.mp3');
-  
-    var notes = [c3,cs3,d3,ds3,e3,f3,fs3,g3,gs3,a3,as3,b3,c4,cs4,d4,ds4,e4,f4,fs4,g4,gs4,a4,as4,b4,c5];
+    var bn4 = new Audio('../assets/notes/bn4.mp3');
+    var cn5 = new Audio('../assets/notes/cn5.mp3');
+
+    var notes = [cn3, cs3, dn3, ds3, en3, fn3, fs3, gn3, gs3, an3, as3, bn3, cn4, cs4, dn4, ds4, en4, fn4, fs4, gn4, gs4, an4, as4, bn4, cn5];
 
 
 
 
-//var hit = new Audio('assets/Hitmarker.mp3');
 
     // OPTIONS
 
@@ -52,7 +51,7 @@ $(document).ready(function () {
         $("#tempSlideInfo").text(`BPM: ${document.getElementById("tempSlide").value}`);
     })
 
-    
+
     var melody = [];
 
     // When "Play!" is clicked
@@ -67,18 +66,18 @@ $(document).ready(function () {
             melody.push(Math.floor(Math.random() * 19));
         }
 
-        setTimeout(melodyPlayback, 1000,melody,notes,tempo,j);
+        setTimeout(melodyPlayback, 1000, melody, notes, tempo, j);
         console.log(melody);
     })
 
     // When "Repeat" is clicked
     $("#repeat").on("click", function () {
-        var j =0;
-       var tempo = document.getElementById("tempSlide").value;
+        var j = 0;
+        var tempo = document.getElementById("tempSlide").value;
 
 
-    setTimeout(melodyPlayback, 1000,melody,notes,tempo,j);
-    console.log(melody);
+        setTimeout(melodyPlayback, 1000, melody, notes, tempo, j);
+        console.log(melody);
     })
 
     //MAIN GAME
@@ -95,7 +94,7 @@ $(document).ready(function () {
 
     $("#check").on("click", function () {
         console.log(melody);
-        if (compare(melody, userArr) && melody!="") {
+        if (compare(melody, userArr) && melody != "") {
             $("#status").text("Correct!");
         } else {
             $("#status").text("Incorrect!");
@@ -109,6 +108,26 @@ $(document).ready(function () {
     })
 })
 
+// KEYS STYLING AND FUNCTIONALITY
+$(".wKey").mouseenter(function () {
+    $(this).addClass("wKHov");
+});
+
+$(".wKey").mouseleave(function () {
+    $(this).removeClass("wKHov");
+});
+
+$(".bKey").mouseenter(function () {
+    $(this).addClass("bKHov");
+});
+
+$(".bKey").mouseleave(function () {
+    $(this).removeClass("bKHov");
+});
+
+$(".bKey, .wKey").click(function () {
+    $(this).animate({backgroundColor: "#FF0000"}, "slow");
+});
 
 //FUNCTIONS
 
@@ -130,22 +149,23 @@ function compare(arr1, arr2) {
 //WRITE ABOUT WHY FOR LOOP DIDN'T WORK IN READ.ME
 
 
-function melodyPlayback(mel,nots,bpm,jj) {
-    
+function melodyPlayback(mel, nots, bpm, jj) {
+
     console.log(bpm);
-    setTimeout(playNote,(60000/bpm),mel,nots,bpm,jj);
+    setTimeout(playNote, (60000 / bpm), mel, nots, bpm, jj);
 
 };
 
 //Play Note
 
-function playNote(mel,nots,bpm,jj){
+function playNote(mel, nots, bpm, jj) {
     console.log(jj);
-    if(mel[jj]==mel[jj-1]){
-        nots[mel[jj-1]].load();
+    if (mel[jj] == mel[jj - 1]) {
+        nots[mel[jj - 1]].load();
     }
     nots[mel[jj]].play();
     jj++;
-    if(jj<mel.length){
-        melodyPlayback(mel,nots,bpm,jj);
-    }};
+    if (jj < mel.length) {
+        melodyPlayback(mel, nots, bpm, jj);
+    }
+};
