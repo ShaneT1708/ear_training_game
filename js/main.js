@@ -9,31 +9,31 @@ $(document).ready(function () {
     // SOUNDS
 
 
-    var cn3 = new Audio('../assets/notes/cn3.mp3');
-    var cs3 = new Audio('../assets/notes/cs3.mp3');
-    var dn3 = new Audio('../assets/notes/dn3.mp3');
-    var ds3 = new Audio('../assets/notes/ds3.mp3');
-    var en3 = new Audio('../assets/notes/en3.mp3');
-    var fn3 = new Audio('../assets/notes/fn3.mp3');
-    var fs3 = new Audio('../assets/notes/fs3.mp3');
-    var gn3 = new Audio('../assets/notes/gn3.mp3');
-    var gs3 = new Audio('../assets/notes/gs3.mp3');
-    var an3 = new Audio('../assets/notes/an3.mp3');
-    var as3 = new Audio('../assets/notes/as3.mp3');
-    var bn3 = new Audio('../assets/notes/bn3.mp3');
-    var cn4 = new Audio('../assets/notes/cn4.mp3');
-    var cs4 = new Audio('../assets/notes/cs4.mp3');
-    var dn4 = new Audio('../assets/notes/dn4.mp3');
-    var ds4 = new Audio('../assets/notes/ds4.mp3');
-    var en4 = new Audio('../assets/notes/en4.mp3');
-    var fn4 = new Audio('../assets/notes/fn4.mp3');
-    var fs4 = new Audio('../assets/notes/fs4.mp3');
-    var gn4 = new Audio('../assets/notes/gn4.mp3');
-    var gs4 = new Audio('../assets/notes/gs4.mp3');
-    var an4 = new Audio('../assets/notes/an4.mp3');
-    var as4 = new Audio('../assets/notes/as4.mp3');
-    var bn4 = new Audio('../assets/notes/bn4.mp3');
-    var cn5 = new Audio('../assets/notes/cn5.mp3');
+    var cn3 = new Audio('/assets/notes/cn3.mp3');
+    var cs3 = new Audio('/assets/notes/cs3.mp3');
+    var dn3 = new Audio('/assets/notes/dn3.mp3');
+    var ds3 = new Audio('/assets/notes/ds3.mp3');
+    var en3 = new Audio('/assets/notes/en3.mp3');
+    var fn3 = new Audio('/assets/notes/fn3.mp3');
+    var fs3 = new Audio('/assets/notes/fs3.mp3');
+    var gn3 = new Audio('/assets/notes/gn3.mp3');
+    var gs3 = new Audio('/assets/notes/gs3.mp3');
+    var an3 = new Audio('/assets/notes/an3.mp3');
+    var as3 = new Audio('/assets/notes/as3.mp3');
+    var bn3 = new Audio('/assets/notes/bn3.mp3');
+    var cn4 = new Audio('/assets/notes/cn4.mp3');
+    var cs4 = new Audio('/assets/notes/cs4.mp3');
+    var dn4 = new Audio('/assets/notes/dn4.mp3');
+    var ds4 = new Audio('/assets/notes/ds4.mp3');
+    var en4 = new Audio('/assets/notes/en4.mp3');
+    var fn4 = new Audio('/assets/notes/fn4.mp3');
+    var fs4 = new Audio('/assets/notes/fs4.mp3');
+    var gn4 = new Audio('/assets/notes/gn4.mp3');
+    var gs4 = new Audio('/assets/notes/gs4.mp3');
+    var an4 = new Audio('/assets/notes/an4.mp3');
+    var as4 = new Audio('/assets/notes/as4.mp3');
+    var bn4 = new Audio('/assets/notes/bn4.mp3');
+    var cn5 = new Audio('/assets/notes/cn5.mp3');
 
     var notes = [cn3, cs3, dn3, ds3, en3, fn3, fs3, gn3, gs3, an3, as3, bn3, cn4, cs4, dn4, ds4, en4, fn4, fs4, gn4, gs4, an4, as4, bn4, cn5];
 
