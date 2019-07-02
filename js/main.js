@@ -9,7 +9,7 @@ $(document).ready(function () {
     // SOUNDS
 
 
-    var cn3 = new Audio("../assets/notes/cn3.mp3");
+    var cn3 = new Audio("assets/notes/cn3.mp3");
     var cs3 = new Audio('../assets/notes/cs3.mp3');
     var dn3 = new Audio('../assets/notes/dn3.mp3');
     var ds3 = new Audio('../assets/notes/ds3.mp3');
