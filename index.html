@@ -10,11 +10,23 @@
 </head>
 
 <body>
+    <div class="instructions">
+        <h2>Pitch Recognition Game</h2>
+        <h3>Instructions: </h3>
+        <h4>Listen to the melody and reinput the correct notes</h4>
+        <p>Use the sliders to select the number of notes be played in sequence, and the rate of playback.<br>
+        Choose from the 3 modes. Since there are fewer black keys, it is the easiest option.<br>
+        Black Keys = Pentatonic, White Keys = Diatonic, All Keys = Chromatic<br>
+        Press "Play!" to generate the melody. Press "Repeat" to hear it again. If you want a new melody to be generated press play again.<br>
+        The first note is highlighted, you must enter all the following notes in the right order.<br>
+        Press "Submit" to check if you are correct, "Undo" to undo your last note and "Reveal" to reveal the correct answer</p>
+    </div>
+    <br>
     <!-- OPTIONS -->
     <div class="options">
         <div class="slidercontainer">
             <p id="lenSlideInfo"></p>
-            <input type="range" min="2" max="10" value="6" class="slider" id="lenSlide">
+            <input type="range" min="2" max="10" value="2" class="slider" id="lenSlide">
         </div>
 
         <div class="slidercontainer">
@@ -22,12 +34,20 @@
                 <input type="range" min="30" max="90" value="60" class="slider" id="tempSlide">
             </div>
 
+            <form action="/action_page.php">
+                <p>Mode:</p>
+                  <input type="radio" name="dif" value="bK" id="bk" checked="checked"> Black Keys Only
+                  <input type="radio" name="dif" value="wK" id="wk"> White Keys Only
+                  <input type="radio" name="dif" value="chrom" id="chrom"> All Keys<br>
+                  <br>
             <button type="button" id="play">Play!</button>
             <button type="button" id="repeat">Repeat</button>
+            
     </div>
 
     <br>
     <br>
+    <div id="userArrDisplay"></div>
     <br>
     
     <!--MAIN GAME SECTION-->
@@ -93,8 +113,9 @@
             </div>
         </div>
         <br>
-        <button type="button" id="check">Check</button>
+        <button type="button" id="check">Submit</button>
         <button type="button" id="undo">Undo</button>
+        <button type="button" id="reveal">Reveal</button>
         <p id="status"></p>
     </div>
 </body>
@@ -104,6 +125,7 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/main.js"></script>
 
 </html>

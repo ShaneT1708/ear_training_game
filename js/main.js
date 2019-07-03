@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     $("#tempSlideInfo").text(`BPM: ${document.getElementById("tempSlide").value}`);
 
+    $("#userArrDisplay").text(`Your Notes: `); // for "Your Notes:"
 
 
     // SOUNDS
@@ -62,12 +63,29 @@ $(document).ready(function () {
         userArr.length = 0;
         var melLength = document.getElementById("lenSlide").value;
         var tempo = document.getElementById("tempSlide").value;
-        for (i = 0; i < melLength; i++) {
-            melody.push(Math.floor(Math.random() * 19));
-        }
 
-        setTimeout(melodyPlayback, 1000, melody, notes, tempo, j);
+        if (document.getElementById("bk").checked) {
+            for (i = 0; i < melLength; i++) {
+                melody.push(Math.floor(Math.random() * 10));
+            }
+
+            melody = toBlackKeys(melody);
+        } else if (document.getElementById("wk").checked) {
+            for (i = 0; i < melLength; i++) {
+                melody.push(Math.floor(Math.random() * 15));
+            }
+            melody = toWhiteKeys(melody);
+        } else if (document.getElementById("chrom").checked) {
+            for (i = 0; i < melLength; i++) {
+                melody.push(Math.floor(Math.random() * 25));
+            }
+        }
+        $(".wKey, .bKey").removeClass("firstNote");
+        $("#b" + melody[0]).addClass("firstNote");
+        setTimeout(melodyPlayback, 50, melody, notes, tempo, j);
         console.log(melody);
+        userArr.push(melody[0]);
+        $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
     })
 
     // When "Repeat" is clicked
@@ -75,9 +93,9 @@ $(document).ready(function () {
         var j = 0;
         var tempo = document.getElementById("tempSlide").value;
 
-
-        setTimeout(melodyPlayback, 1000, melody, notes, tempo, j);
+        setTimeout(melodyPlayback, 50, melody, notes, tempo, j);
         console.log(melody);
+        
     })
 
     //MAIN GAME
@@ -87,6 +105,7 @@ $(document).ready(function () {
     $(".pianoKey").on("click", function () {
         userArr.push(parseInt((event.target.id).substr(1, 2)));
         console.log(userArr);
+        $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
     })
 
 
@@ -105,8 +124,17 @@ $(document).ready(function () {
 
     $("#undo").on("click", function () {
         userArr.pop();
+        $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
+    })
+
+    //When "Reveal" is clicked
+
+    $("#reveal").on("click", function () {
+        userArr.pop();
+        $("#status").text(`Answer: ${parseNotes(melody)}`); // for "Your Notes:"
     })
 })
+
 
 // KEYS STYLING AND FUNCTIONALITY
 $(".wKey").mouseenter(function () {
@@ -125,9 +153,25 @@ $(".bKey").mouseleave(function () {
     $(this).removeClass("bKHov");
 });
 
-$(".bKey, .wKey").click(function () {
-    $(this).animate({backgroundColor: "#FF0000"}, "slow");
-});
+/*$(".bKey, .wKey").click(function() {
+    $(this).fadeOut(1000, function() {
+        $(this).css("background-color", "#FF0000").fadeIn(1000);
+    });
+ }); */
+
+//THIS ONE WAS MORE RECENT
+// $(".bKey, .wKey").click(function () {
+//     $(this).animate({
+//         backgroundColor: "#FF0000"
+//     }, "slow").addClass("bKey");
+//     $(this).removeAttr(backgroundColor);
+// });
+
+$(".bKey, .wKey").click(function() {
+    $(this).addClass("kClick").delay(200).queue(function() {
+        $(this).removeClass("kClick").dequeue();});
+ }); 
+
 
 //FUNCTIONS
 
@@ -169,3 +213,38 @@ function playNote(mel, nots, bpm, jj) {
         melodyPlayback(mel, nots, bpm, jj);
     }
 };
+
+//Parse Notes
+
+function parseNotes(ar) {
+    nar = ["C3", "C#3", "D3", "Eb3", "E3", "F3", "F#3", "G3", "G#3", "A3", "Bb3", "B3", "C4", "C#4", "D4", "Eb4", "E4", "F4", "F#4", "G4", "G#4", "A4", "Bb4", "B4", "C5"]
+    jar = [];
+    for (ii = 0; ii < ar.length; ii++) {
+        jar.push(nar[ar[ii]]);
+    }
+    return jar;
+}
+
+//Convert To Black Keys
+
+function toBlackKeys(ar) {
+    bar = [1, 3, 6, 8, 10, 13, 15, 18, 20, 22];
+    jar = [];
+    for (i = 0; i < ar.length; i++) {
+        jar.push(bar[ar[i]]);
+    }
+    return jar;
+
+}
+
+//Convert To White Keys
+
+function toWhiteKeys(ar) {
+    bar = [0,2,4,5,7,9,11,12,14,16,17,19,21,23,24];
+    jar = [];
+    for (i = 0; i < ar.length; i++) {
+        jar.push(bar[ar[i]]);
+    }
+    return jar;
+
+}

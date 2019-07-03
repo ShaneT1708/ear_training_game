@@ -2,11 +2,11 @@
     width: 100%;
   }
 
-
-
 button {
   margin: 4px;
 }
+
+/* Keyboard */
 
 .keyboard{
   border: solid 1px;
@@ -102,6 +102,9 @@ button {
 
 }
 /* Key Media Queries */
+.firstNote{
+  background-color: #84b383;
+}
 .wKHov{
   background-color: #bbbbbb;
 }
@@ -111,5 +114,6 @@ button {
 }
 
 .kClick{
-  background-color: rgb(154, 197, 207);
+  background-color: rgb(162, 154, 207);
 }
+
