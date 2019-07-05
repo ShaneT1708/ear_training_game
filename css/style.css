@@ -16,7 +16,7 @@ button {
 }
 /*Modal*/
 .modal-content{
-  background-color: #333333;
+  background-color: #222222;
   border: 5px solid rgb(211, 2, 2);
   border-radius:20px;
 }
@@ -66,6 +66,13 @@ button {
 
 .radi{
  margin: 8px;
+}
+
+#check{
+  margin: 32px 0px;
+  border: 2px solid rgb(100, 100, 211);
+  color:  rgb(100, 100, 211);
+
 }
 
 #play{

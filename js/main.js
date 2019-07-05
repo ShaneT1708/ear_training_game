@@ -4,11 +4,13 @@ $(document).ready(function () {
 
     $("#tempSlideInfo").text(`BPM: ${document.getElementById("tempSlide").value}`);
 
-    $("#lLInfo").text(`Leap Limit (Semitones): ${document.getElementById("lL").value}`);
+    $("#lLInfo").text(`Leap Limit (Scale Degrees): ${parseInt(document.getElementById("lL").value)+1}`);
 
     $('#myModal').modal('show');
 
     $("#userArrDisplay").text(`Your Notes: `); // for "Your Notes:"
+
+    
 
     var cw = $('.keyboard').width();
     $('.keyboard').css({
@@ -66,9 +68,26 @@ $(document).ready(function () {
     })
 
     $("#lL").on("input", function () {
-        $("#lLInfo").text(`Leap Limit (Semitones): ${document.getElementById("lL").value}`);
+        $("#lLInfo").text(`Leap Limit (Scale Degrees): ${parseInt(document.getElementById("lL").value)+1}`);
     })
 
+    // $('input[type=radio][id="bk"]').change(function () {   
+    //     $( "#lL" ).slider( "option", "max", 10 );
+    // });
+
+    $("#bk").change (function(){
+
+            $("#lL").attr("max", "9");
+        
+    })
+
+    $("#wk").change (function(){
+        $("#lL").attr("max", "14");
+    })
+
+    $("#chrom").change (function(){
+        $("#lL").attr("max", "25");
+    })
     var melody = [];
 
     // When "Play!" is clicked
@@ -85,25 +104,25 @@ $(document).ready(function () {
                 var i = 0;
                 while (i < melLength) {
                     var buf = Math.floor(Math.random() * 10);
-                    if (!melody.includes(buf)) {
+                    console.log("TTT"+buf);
                         if (i > 0) {
+                            if(buf !=melody[i-1]){
                             if (Math.abs(buf-melody[i - 1]) <= lLimit) {
+                            //  if((buf-melody[i-1]<=lLimit&&buf-melody[i-1]>=0||buf-melody[i-1]>=lLimit&&buf-melody[i-1]<=0)){  
                                 melody.push(buf);
-                                console.log("Hi" + lLimit + "M" + melody[i - 1] );
+                                console.log(Math.abs(buf-melody[i - 1]));
                                 i++;
                             }
                             else continue;
-                        } else {
+                        }
+                        else continue;
+                    }
+                     else {
                             melody.push(buf);
                             i++;
                         }
                     }
 
-                    else continue;
-                    
-                } 
-                
-            
             melody = toBlackKeys(melody);
             
             
@@ -113,21 +132,49 @@ $(document).ready(function () {
             var i = 0;
             while (i < melLength) {
                 var buf = Math.floor(Math.random() * 15);
-                if (!melody.includes(buf)) {
-                    melody.push(buf);
-                } else continue;
-                i++
-            }
+                console.log("TTT"+buf);
+                    if (i > 0) {
+                        if(buf !=melody[i-1]){
+                        if (Math.abs(buf-melody[i - 1]) <= lLimit) {
+                        //  if((buf-melody[i-1]<=lLimit&&buf-melody[i-1]>=0||buf-melody[i-1]>=lLimit&&buf-melody[i-1]<=0)){  
+                            melody.push(buf);
+                            console.log(Math.abs(buf-melody[i - 1]));
+                            i++;
+                        }
+                        else continue;
+                    }
+                    else continue;
+                }
+                 else {
+                        melody.push(buf);
+                        i++;
+                    }
+                }
+
             melody = toWhiteKeys(melody);
         } else if (document.getElementById("chrom").checked) {
             var i = 0;
             while (i < melLength) {
-                var buf = Math.floor(Math.random() * 25);
-                if (!melody.includes(buf)) {
-                    melody.push(buf);
-                } else continue;
-                i++
-            }
+                var buf = Math.floor(Math.random() * 10);
+                console.log("TTT"+buf);
+                    if (i > 0) {
+                        if(buf !=melody[i-1]){
+                        if (Math.abs(buf-melody[i - 1]) <= lLimit) {
+                        //  if((buf-melody[i-1]<=lLimit&&buf-melody[i-1]>=0||buf-melody[i-1]>=lLimit&&buf-melody[i-1]<=0)){  
+                            melody.push(buf);
+                            console.log(Math.abs(buf-melody[i - 1]));
+                            i++;
+                        }
+                        else continue;
+                    }
+                    else continue;
+                }
+                 else {
+                        melody.push(buf);
+                        i++;
+                    }
+                }
+
         }
         $(".wKey, .bKey").removeClass("firstNote"); $("#b" + melody[0]).addClass("firstNote"); setTimeout(melodyPlayback, 50, melody, notes, tempo, j); console.log(melody); userArr.push(melody[0]); $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
     })
@@ -160,10 +207,12 @@ $(".pianoKey").on("click", function () {
 $("#check").on("click", function () {
     console.log(melody);
     if (compare(melody, userArr) && melody != "") {
-        $("#status").text("Correct!");
+        var status = "Correct!"
     } else {
-        $("#status").text("Incorrect!");
+        var status = "Incorrect!"
     }
+    $('#statmod').modal('show');
+    $("#statmod h4").text(`${status}`); // for "Your Notes:"
 })
 
 //When "Undo" is clicked
@@ -238,6 +287,15 @@ function melodyPlayback(mel, nots, bpm, jj) {
 
 function playNote(mel, nots, bpm, jj) {
     console.log(jj);
+    if (mel[jj] == mel[jj - 1]) {
+        nots[mel[jj - 1]].load();
+    }
+    if (mel[jj] == mel[jj - 2]) {
+        nots[mel[jj - 2]].load();
+    }
+    if (mel[jj] == mel[jj - 3]) {
+        nots[mel[jj - 3]].load();
+    }
     nots[mel[jj]].play();
     jj++;
     if (jj < mel.length) {
