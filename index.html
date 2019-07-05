@@ -5,127 +5,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>Ear Training</title>
 </head>
 
 <body>
-    <div class="instructions">
-        <h2>Pitch Recognition Game</h2>
-        <h3>Instructions: </h3>
-        <h4>Listen to the melody and reinput the correct notes</h4>
-        <p>Use the sliders to select the number of notes be played in sequence, and the rate of playback.<br>
-        Choose from the 3 modes. Since there are fewer black keys, it is the easiest option.<br>
-        Black Keys = Pentatonic, White Keys = Diatonic, All Keys = Chromatic<br>
-        Press "Play!" to generate the melody. Press "Repeat" to hear it again. If you want a new melody to be generated press play again.<br>
-        The first note is highlighted, you must enter all the following notes in the right order.<br>
-        Press "Submit" to check if you are correct, "Undo" to undo your last note and "Reveal" to reveal the correct answer</p>
-    </div>
-    <br>
-    <!-- OPTIONS -->
-    <div class="options">
-        <div class="slidercontainer">
-            <p id="lenSlideInfo"></p>
-            <input type="range" min="2" max="10" value="2" class="slider" id="lenSlide">
+    <div class="tainer">
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info " id="instructions" data-toggle="modal"
+            data-target="#myModal">Instructions</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Relative Pitch Ear Training: Instructions</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Use the sliders to select the number of notes to be played in sequence, and the rate of
+                            playback.</p>
+                        <p>
+                            Choose from the 3 modes. Since there are fewer black keys, it is the easiest option.</p>
+                        <p>
+                            Black Keys = Pentatonic, White Keys = Diatonic, All Keys = Chromatic</p>
+                        <p>
+                            Press "Play!" to generate the melody. Press "Repeat" to hear it again. If you want a new
+                            melody to
+                            be
+                            generated press play again.</p>
+                        <p>
+                            The first note is highlighted, you must enter all the following notes in the right order.
+                        </p>
+                        <p>
+                            Press "Submit" to check if you are correct, "Undo" to undo your last note and "Reveal" to
+                            reveal the
+                            correct
+                            answer</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="slidercontainer">
-                <p id="tempSlideInfo"></p>
-                <input type="range" min="30" max="90" value="60" class="slider" id="tempSlide">
+        <!-- <div class="instructions">
+                <h2>Pitch Recognition Game</h2>
+                <h3>Instructions: </h3>
+                <h4>Listen to the melody and reinput the correct notes</h4>
+                <p>Use the sliders to select the number of notes be played in sequence, and the rate of playback.<br>
+                    Choose from the 3 modes. Since there are fewer black keys, it is the easiest option.<br>
+                    Black Keys = Pentatonic, White Keys = Diatonic, All Keys = Chromatic<br>
+                    Press "Play!" to generate the melody. Press "Repeat" to hear it again. If you want a new melody to
+                    be
+                    generated press play again.<br>
+                    The first note is highlighted, you must enter all the following notes in the right order.<br>
+                    Press "Submit" to check if you are correct, "Undo" to undo your last note and "Reveal" to reveal the
+                    correct
+                    answer</p>
             </div>
+            <br> -->
+        <!-- OPTIONS -->
+        <div class="options row">
+            <div class="sliders col-4">
+                <div class="slidercontainer">
+                    <p id="lenSlideInfo"></p>
+                    <input type="range" min="2" max="10" value="2" class=" slider"id="lenSlide">
+                </div>
 
-            <form action="/action_page.php">
-                <p>Mode:</p>
-                  <input type="radio" name="dif" value="bK" id="bk" checked="checked"> Black Keys Only
-                  <input type="radio" name="dif" value="wK" id="wk"> White Keys Only
-                  <input type="radio" name="dif" value="chrom" id="chrom"> All Keys<br>
-                  <br>
-            <button type="button" id="play">Play!</button>
-            <button type="button" id="repeat">Repeat</button>
-            
-    </div>
+                <div class="slidercontainer">
+                    <p id="tempSlideInfo"></p>
+                    <input type="range" min="30" max="90" value="60" class=" slider" id="tempSlide">
+                </div>
 
-    <br>
-    <br>
-    <div id="userArrDisplay"></div>
-    <br>
-    
-    <!--MAIN GAME SECTION-->
-    <div class="main">
-        <!--<div class="fakeboard">
-            <button type="button" id="b0" class="pianoKey">0</button>
-            <button type="button" id="b1" class="pianoKey">1</button>
-            <button type="button" id="b2" class="pianoKey">2</button>
-            <button type="button" id="b3" class="pianoKey">3</button>
-            <button type="button" id="b4" class="pianoKey">4</button>
-            <button type="button" id="b5" class="pianoKey">5</button>
-            <button type="button" id="b6" class="pianoKey">6</button>
-            <button type="button" id="b7" class="pianoKey">7</button>
-            <button type="button" id="b8" class="pianoKey">8</button>
-            <button type="button" id="b9" class="pianoKey">9</button>
-            <button type="button" id="b10" class="pianoKey">10</button>
-            <button type="button" id="b11" class="pianoKey">11</button>
-            <button type="button" id="b12" class="pianoKey">12</button>
-            <button type="button" id="b13" class="pianoKey">13</button>
-            <button type="button" id="b14" class="pianoKey">14</button>
-            <button type="button" id="b15" class="pianoKey">15</button>
-            <button type="button" id="b16" class="pianoKey">16</button>
-            <button type="button" id="b17" class="pianoKey">17</button>
-            <button type="button" id="b18" class="pianoKey">18</button>
-        </div> -->
-        <div class="keyboard">
-            <div class="whiteKeys">
-                <div class="wKey pianoKey"id="b0"></div>
-                <div class="wKey pianoKey"id="b2"></div>
-                <div class="wKey pianoKey"id="b4"></div>
-                <div class="wKey pianoKey"id="b5"></div>
-                <div class="wKey pianoKey"id="b7"></div>
-                <div class="wKey pianoKey"id="b9"></div>
-                <div class="wKey pianoKey"id="b11"></div>
-                <div class="wKey pianoKey"id="b12"></div>
-                <div class="wKey pianoKey"id="b14"></div>
-                <div class="wKey pianoKey"id="b16"></div>
-                <div class="wKey pianoKey"id="b17"></div>
-                <div class="wKey pianoKey"id="b19"></div>
-                <div class="wKey pianoKey"id="b21"></div>
-                <div class="wKey pianoKey"id="b23"></div>
-                <div class="wKey pianoKey"id="b24"></div>
+                <div class="slidercontainer">
+                    <p id="lLInfo"></p>
+                    <input type="range" min="1" max="24" value="12" class=" slider" id="lL">
+                </div>
             </div>
-            <div class="blackKeys">
-                <div class="bKInner1">
-                    <div class="bKey bK1-1 pianoKey"id="b1"></div>
-                    <div class="bKey bK1-2 pianoKey"id="b3"></div>
+            <div class="form col-3">
+                <form action="/action_page.php">
+                    
+                    <input type="radio" name="dif" value="bK" id="bk" checked="checked" class="radi"> Black Keys Only<br>
+                    <input type="radio" name="dif" value="wK" id="wk" class="radi"> White Keys Only<br>
+                    <input type="radio" name="dif" value="chrom" id="chrom" class="radi"> All Keys<br>
+                    
+                    <button type="button" id="play"><i class="fa fa-play"></i>Play!</button>
+                    <button type="button" id="repeat">Repeat</button>
+            </div>
+        
+        <div class="arrays col-5">
+                <button type="button" id="undo"class="arrButton">Undo</button>
+                <button type="button" id="check" class="arrButton">Submit</button>
+                <button type="button" id="reveal"class="arrButton">Reveal</button>
+            <div id="userArrDisplay"></div>
+        </div>   
+        </div>
+        <!--MAIN GAME SECTION-->
+        <div class="main">
+
+            <div class="keyboard">
+                <div class="whiteKeys">
+                    <div class="wKey pianoKey" id="b0"></div>
+                    <div class="wKey pianoKey" id="b2"></div>
+                    <div class="wKey pianoKey" id="b4"></div>
+                    <div class="wKey pianoKey" id="b5"></div>
+                    <div class="wKey pianoKey" id="b7"></div>
+                    <div class="wKey pianoKey" id="b9"></div>
+                    <div class="wKey pianoKey" id="b11"></div>
+                    <div class="wKey pianoKey" id="b12"></div>
+                    <div class="wKey pianoKey" id="b14"></div>
+                    <div class="wKey pianoKey" id="b16"></div>
+                    <div class="wKey pianoKey" id="b17"></div>
+                    <div class="wKey pianoKey" id="b19"></div>
+                    <div class="wKey pianoKey" id="b21"></div>
+                    <div class="wKey pianoKey" id="b23"></div>
+                    <div class="wKey pianoKey" id="b24"></div>
                 </div>
-                <div class="bKInner2">
-                        <div class="bKey bK2-1 pianoKey"id="b6"></div>
-                        <div class="bKey bK2-2 pianoKey"id="b8"></div>
-                        <div class="bKey bK2-3 pianoKey"id="b10"></div>
-                </div>
-                <div class="bKInner3">
-                        <div class="bKey bK1-1 pianoKey"id="b13"></div>
-                        <div class="bKey bK1-2 pianoKey"id="b15"></div>
+                <div class="blackKeys">
+                    <div class="bKInner1">
+                        <div class="bKey bK1-1 pianoKey" id="b1"></div>
+                        <div class="bKey bK1-2 pianoKey" id="b3"></div>
+                    </div>
+                    <div class="bKInner2">
+                        <div class="bKey bK2-1 pianoKey" id="b6"></div>
+                        <div class="bKey bK2-2 pianoKey" id="b8"></div>
+                        <div class="bKey bK2-3 pianoKey" id="b10"></div>
+                    </div>
+                    <div class="bKInner3">
+                        <div class="bKey bK1-1 pianoKey" id="b13"></div>
+                        <div class="bKey bK1-2 pianoKey" id="b15"></div>
                     </div>
                     <div class="bKInner4">
-                            <div class="bKey bK2-1 pianoKey"id="b18"></div>
-                            <div class="bKey bK2-2 pianoKey"id="b20"></div>
-                            <div class="bKey bK2-3 pianoKey"id="b22"></div>
+                        <div class="bKey bK2-1 pianoKey" id="b18"></div>
+                        <div class="bKey bK2-2 pianoKey" id="b20"></div>
+                        <div class="bKey bK2-3 pianoKey" id="b22"></div>
                     </div>
+                </div>
+
             </div>
+            
+            <!-- <p id="status"></p> -->
         </div>
-        <br>
-        <button type="button" id="check">Submit</button>
-        <button type="button" id="undo">Undo</button>
-        <button type="button" id="reveal">Reveal</button>
-        <p id="status"></p>
     </div>
 </body>
 
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
 <script type="text/javascript" src="js/main.js"></script>
 
 </html>

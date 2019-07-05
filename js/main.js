@@ -4,9 +4,22 @@ $(document).ready(function () {
 
     $("#tempSlideInfo").text(`BPM: ${document.getElementById("tempSlide").value}`);
 
+    $("#lLInfo").text(`Leap Limit (Semitones): ${document.getElementById("lL").value}`);
+
+    $('#myModal').modal('show');
+
     $("#userArrDisplay").text(`Your Notes: `); // for "Your Notes:"
 
-
+    var cw = $('.keyboard').width();
+    $('.keyboard').css({
+        'height': (cw / 3) + 'px'
+    });
+    $(window).resize(function () {
+        var cw = $('.keyboard').width();
+        $('.keyboard').css({
+            'height': (cw / 3) + 'px'
+        });
+    });
     // SOUNDS
 
 
@@ -52,87 +65,120 @@ $(document).ready(function () {
         $("#tempSlideInfo").text(`BPM: ${document.getElementById("tempSlide").value}`);
     })
 
+    $("#lL").on("input", function () {
+        $("#lLInfo").text(`Leap Limit (Semitones): ${document.getElementById("lL").value}`);
+    })
 
     var melody = [];
 
     // When "Play!" is clicked
 
     $("#play").on("click", function () {
-        var j = 0;
-        melody.length = 0;
-        userArr.length = 0;
-        var melLength = document.getElementById("lenSlide").value;
-        var tempo = document.getElementById("tempSlide").value;
+            var j = 0;
+            melody.length = 0;
+            userArr.length = 0;
+            var melLength = document.getElementById("lenSlide").value;
+            var tempo = document.getElementById("tempSlide").value;
+            var lLimit = document.getElementById("lL").value;
 
-        if (document.getElementById("bk").checked) {
-            for (i = 0; i < melLength; i++) {
-                melody.push(Math.floor(Math.random() * 10));
-            }
+            if (document.getElementById("bk").checked) {
+                var i = 0;
+                while (i < melLength) {
+                    var buf = Math.floor(Math.random() * 10);
+                    if (!melody.includes(buf)) {
+                        if (i > 0) {
+                            if (Math.abs(buf-melody[i - 1]) <= lLimit) {
+                                melody.push(buf);
+                                console.log("Hi" + lLimit + "M" + melody[i - 1] );
+                                i++;
+                            }
+                            else continue;
+                        } else {
+                            melody.push(buf);
+                            i++;
+                        }
+                    }
 
+                    else continue;
+                    
+                } 
+                
+            
             melody = toBlackKeys(melody);
+            
+            
+        
+
         } else if (document.getElementById("wk").checked) {
-            for (i = 0; i < melLength; i++) {
-                melody.push(Math.floor(Math.random() * 15));
+            var i = 0;
+            while (i < melLength) {
+                var buf = Math.floor(Math.random() * 15);
+                if (!melody.includes(buf)) {
+                    melody.push(buf);
+                } else continue;
+                i++
             }
             melody = toWhiteKeys(melody);
         } else if (document.getElementById("chrom").checked) {
-            for (i = 0; i < melLength; i++) {
-                melody.push(Math.floor(Math.random() * 25));
+            var i = 0;
+            while (i < melLength) {
+                var buf = Math.floor(Math.random() * 25);
+                if (!melody.includes(buf)) {
+                    melody.push(buf);
+                } else continue;
+                i++
             }
         }
-        $(".wKey, .bKey").removeClass("firstNote");
-        $("#b" + melody[0]).addClass("firstNote");
-        setTimeout(melodyPlayback, 50, melody, notes, tempo, j);
-        console.log(melody);
-        userArr.push(melody[0]);
-        $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
+        $(".wKey, .bKey").removeClass("firstNote"); $("#b" + melody[0]).addClass("firstNote"); setTimeout(melodyPlayback, 50, melody, notes, tempo, j); console.log(melody); userArr.push(melody[0]); $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
     })
 
-    // When "Repeat" is clicked
-    $("#repeat").on("click", function () {
-        var j = 0;
-        var tempo = document.getElementById("tempSlide").value;
+// When "Repeat" is clicked
+$("#repeat").on("click", function () {
+    var j = 0;
+    var tempo = document.getElementById("tempSlide").value;
 
-        setTimeout(melodyPlayback, 50, melody, notes, tempo, j);
-        console.log(melody);
-        
-    })
+    setTimeout(melodyPlayback, 50, melody, notes, tempo, j);
+    console.log(melody);
 
-    //MAIN GAME
+})
 
-    var userArr = [];
+//MAIN GAME
 
-    $(".pianoKey").on("click", function () {
+var userArr = [];
+
+$(".pianoKey").on("click", function () {
+    if (userArr.length <= 9) {
         userArr.push(parseInt((event.target.id).substr(1, 2)));
         console.log(userArr);
         $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
-    })
+    }
+})
 
 
-    //When "Check" is clicked
+//When "Check" is clicked
 
-    $("#check").on("click", function () {
-        console.log(melody);
-        if (compare(melody, userArr) && melody != "") {
-            $("#status").text("Correct!");
-        } else {
-            $("#status").text("Incorrect!");
-        }
-    })
+$("#check").on("click", function () {
+    console.log(melody);
+    if (compare(melody, userArr) && melody != "") {
+        $("#status").text("Correct!");
+    } else {
+        $("#status").text("Incorrect!");
+    }
+})
 
-    //When "Undo" is clicked
+//When "Undo" is clicked
 
-    $("#undo").on("click", function () {
-        userArr.pop();
-        $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
-    })
+$("#undo").on("click", function () {
+    userArr.pop();
+    $("#userArrDisplay").text(`Your Notes: ${parseNotes(userArr)}`); // for "Your Notes:"
+})
 
-    //When "Reveal" is clicked
+//When "Reveal" is clicked
 
-    $("#reveal").on("click", function () {
-        userArr.pop();
-        $("#status").text(`Answer: ${parseNotes(melody)}`); // for "Your Notes:"
-    })
+$("#reveal").on("click", function () {
+    userArr.pop();
+    $("#userArrDisplay").text(`Answer: ${parseNotes(melody)}`);
+})
 })
 
 
@@ -153,24 +199,12 @@ $(".bKey").mouseleave(function () {
     $(this).removeClass("bKHov");
 });
 
-/*$(".bKey, .wKey").click(function() {
-    $(this).fadeOut(1000, function() {
-        $(this).css("background-color", "#FF0000").fadeIn(1000);
+
+$(".bKey, .wKey").click(function () {
+    $(this).addClass("kClick").delay(200).queue(function () {
+        $(this).removeClass("kClick").dequeue();
     });
- }); */
-
-//THIS ONE WAS MORE RECENT
-// $(".bKey, .wKey").click(function () {
-//     $(this).animate({
-//         backgroundColor: "#FF0000"
-//     }, "slow").addClass("bKey");
-//     $(this).removeAttr(backgroundColor);
-// });
-
-$(".bKey, .wKey").click(function() {
-    $(this).addClass("kClick").delay(200).queue(function() {
-        $(this).removeClass("kClick").dequeue();});
- }); 
+});
 
 
 //FUNCTIONS
@@ -204,9 +238,6 @@ function melodyPlayback(mel, nots, bpm, jj) {
 
 function playNote(mel, nots, bpm, jj) {
     console.log(jj);
-    if (mel[jj] == mel[jj - 1]) {
-        nots[mel[jj - 1]].load();
-    }
     nots[mel[jj]].play();
     jj++;
     if (jj < mel.length) {
@@ -217,7 +248,7 @@ function playNote(mel, nots, bpm, jj) {
 //Parse Notes
 
 function parseNotes(ar) {
-    nar = ["C3", "C#3", "D3", "Eb3", "E3", "F3", "F#3", "G3", "G#3", "A3", "Bb3", "B3", "C4", "C#4", "D4", "Eb4", "E4", "F4", "F#4", "G4", "G#4", "A4", "Bb4", "B4", "C5"]
+    nar = ["C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5"]
     jar = [];
     for (ii = 0; ii < ar.length; ii++) {
         jar.push(nar[ar[ii]]);
@@ -240,7 +271,7 @@ function toBlackKeys(ar) {
 //Convert To White Keys
 
 function toWhiteKeys(ar) {
-    bar = [0,2,4,5,7,9,11,12,14,16,17,19,21,23,24];
+    bar = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24];
     jar = [];
     for (i = 0; i < ar.length; i++) {
         jar.push(bar[ar[i]]);
