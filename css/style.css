@@ -46,7 +46,7 @@ button {
 }
 /* Main */
 .tainer{
-  background-image: url("../../assets/images/wood.jpg");
+  background-image:url("../assets/images/wood.jpg");
   background-size: 95%,95%;
   padding:15px 25px;
   max-width:1000px;
@@ -69,14 +69,14 @@ button {
 }
 
 #check{
-  margin: 32px 0px;
+  margin: 32px 0px 15px 0px;
   border: 2px solid rgb(100, 100, 211);
   color:  rgb(100, 100, 211);
 
 }
 
 #play{
-  margin: 32px 0px;
+  margin: 17px 0px 32px 0px;
   border: 2px solid rgb(2, 211, 2);
   color:  rgb(2, 211, 2);
 
@@ -92,11 +92,12 @@ button {
 }
 
 .arrays{
-   margin-top: 65px;
+   margin-top: 25px;
+   margin-bottom: 10px;
 
 }
 .form{
-
+  margin-top: 15px;
 } 
 
 #instructions{

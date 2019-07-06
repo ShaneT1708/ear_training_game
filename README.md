@@ -5,102 +5,52 @@ The program generates a sequence of notes, and the user must reinput them in the
 There a a few different options to make this easier or more difficult.
  
 ## UX
- 
-Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+I coloured the more important buttons to convey their importance.
+
+I chose to style the interface to look like an old synth to give it a bit of flare
+
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
- 
-### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
+I started working on the core skeleton of the app first. Just generating an array and getting the user to corecctly match it.
+From there I added sounds and various sliders and radio to allow the user to tailer their difficulty.
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
+Number of Notes: The longer the sequence of notes, the more difficult it is to remember and analyse.
+BPM: Making the tempo faster give the user less time to process each note.
+Leap Limit: Allowing the user the set the maximum distance between two subsequent notes, larger jumps being more difficult.
+Radio buttons: Allowing the user to limit the pool of availible notes to only black keys, only white keys, or all.
 
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
-- Another feature idea
+
+I chose not to optimise for mobile since I had a limited amount of time and felt that some of the other features were more important.
+I might consider adding a free play mode that allows the user to freely play notes on the keyboard. This would probably require rewriting major chunks of code though, as the playNote command needs arrays as input.
+Fix the bug that only the bottom of the white keys are clickable.
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+HTML: For the structure of the webpage.
+CSS: For the styling of the webpage.
+Javascript: For programming the logic of the app.
 
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+Bootstrap: Used with HTML for the grid layout.
+JQuery: Used with Javascript to simplify DOM manipulation.
 
 
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+To test the app I ran it using all of the different options' settings, and in different combinations to make sure.
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
-
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
-
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+I had the few musicians in my class test it as well to try and find anything that I might have overlooked.
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+While working on the project, I have been incrementally commiting changes to a GitHub repository using the ubuntu console. This can be accessed at https://github.com/ShaneT1708/ear_training_game
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
-
-In addition, if it is not obvious, you should also describe how to run your code locally.
-
+A live version of the site can be found at https://shanet1708.github.io/ear_training_game/
 
 ## Credits
 
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
-
-### Media
-- The photos used in this site were obtained from ...
-
-### Acknowledgements
-
-- I received inspiration for this project from X
-
-
-
-
-
-
-
-
-
-Features to Add:
-
-.UI
-//.Leap Limit?
-.Change Play Button to "New Notes after click"
-.Free Play Mode?
-.Fix only being able to click bottom of key
-.NO MOBILE?
-.Modal for correct and incorrect (instructions at sstart and from button)
-.move submit and undo closer to arr display,
-.Have correct arr override user arr display
-.Vertical sliders
-
-
-
-https://www.freepik.com/free-photo/wooden-texture_1000699.htm#page=1&index=4&query=dark%20wood
+Background Wood Texture: https://www.freepik.com/free-photo/wooden-texture_1000699.htm#page=1&index=4&query=dark%20wood
